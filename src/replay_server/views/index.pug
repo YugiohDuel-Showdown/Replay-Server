@@ -1,0 +1,12 @@
+extends base/base.pug
+block append nav-title
+	a.navbar-brand(href='/') Yugioh Duel Replays
+block content
+	.card.text-center
+		.card-header.bg-dark.text-light
+			h1 Welcome to The Yugioh Duel's Replay server!
+	br
+	h2.text-center.bg-dark.text-light Replays
+	each replay in replays
+		include mixins/replay_card.pug
+		+replay_card()(replay=replay)
