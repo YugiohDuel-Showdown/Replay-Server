@@ -1,5 +1,6 @@
 import { Router } from "express";
 import Replay, { IReplay } from "../../database/models/replay";
+import axios from "axios";
 
 export const router = Router();
 
@@ -53,6 +54,10 @@ router.route("/:id").post(async (req, res) => {
 		uploadtime: req.body.uploadtime,
 	});
 	await newReplay.save();
+
+	await axios.post('http://40.160.235.137:3000/replay', {
+		replay_id: req.body.id,
+	});
 
 	res.status(200).send("Replay has been saved!");
 }).get(async (req, res) => {
