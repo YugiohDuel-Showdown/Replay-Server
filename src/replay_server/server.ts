@@ -8,7 +8,7 @@ import { router as replaysRouter } from "./routes/replays";
 
 const app = express();
 
-try {
+export function startServer() {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
@@ -28,6 +28,4 @@ try {
     console.log(`Replay Server is ready to serve!`);
     console.log(`Listening on port ${Config.REPLAY_SERVER_PORT}`);
   });
-} catch (error) {
-  console.log(error);
 }
