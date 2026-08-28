@@ -12,6 +12,10 @@ try {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
+  app.get("/healthz", (req, res) => {
+    res.status(200).send("ok");
+  });
+
   // Routes
   app.use("/", mainRouter, replaysRouter);
 
