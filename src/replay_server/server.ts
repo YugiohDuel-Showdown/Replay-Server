@@ -12,6 +12,11 @@ export function startServer() {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
+  // Template Engine
+  app.set("view engine", "pug");
+  app.set('views', __dirname + '/views');
+  app.use('/assets', express.static(__dirname + '/views/assets'));
+
   app.get("/healthz", (req, res) => {
     res.status(200).send("ok");
   });
@@ -27,11 +32,6 @@ export function startServer() {
 
   // Routes
   app.use("/", mainRouter, replaysRouter);
-
-  // Template Engine
-  app.set("view engine", "pug");
-  app.set('views', __dirname + '/views');
-  app.use(express.static(__dirname + '/views/assets'));
 
   app.listen(Config.REPLAY_SERVER_PORT, Config.REPLAY_SERVER_HOST, async () => {
     console.log(`Replay Server is ready to serve!`);
